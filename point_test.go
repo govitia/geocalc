@@ -22,6 +22,6 @@ func TestPoint_Bearing(t *testing.T) {
 	p2 := geo.NewPoint(51, 3)
 	assert.NotNil(t, p1)
 	assert.NotNil(t, p2)
-	assert.Equal(t, float64(0), p1.Bearing(*p2))
-	assert.Equal(t, math.Pi, p2.Bearing(*p1))
+	assert.Equal(t, float64(0), p1.Bearing(p2))
+	assert.Equal(t, math.Pi, p2.Bearing(p1))
 }
