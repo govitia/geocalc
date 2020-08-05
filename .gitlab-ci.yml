@@ -1,0 +1,10 @@
+stages:
+ - testing
+
+Testing:
+  stage: testing
+  image: golangci/golangci-lint
+  script:
+    - go get -insecure all
+    - golangci-lint run
+    - go test -cover ./...
