@@ -10,18 +10,25 @@ import (
 )
 
 func TestNewPoint(t *testing.T) {
-	lat, lon := float64(45), float64(54)
+	lat, lon := math.Pi, math.Pi
 	p := geo.NewPoint(lat, lon)
-	assert.NotNil(t, p)
 	assert.Equal(t, lat, p.Lat)
 	assert.Equal(t, lon, p.Lon)
 }
 
 func TestPoint_Bearing(t *testing.T) {
-	p1 := geo.NewPoint(50, 3)
-	p2 := geo.NewPoint(51, 3)
-	assert.NotNil(t, p1)
-	assert.NotNil(t, p2)
+	p1 := geo.NewPoint(0, 0)
+	p2 := geo.NewPoint(math.Pi, 0)
 	assert.Equal(t, float64(0), p1.Bearing(p2))
 	assert.Equal(t, math.Pi, p2.Bearing(p1))
+}
+
+func TestPoint_Walk(t *testing.T) {
+	p1 := geo.NewPoint(0, 0)
+	p2 := p1.Walk(math.Pi/2, geo.EarthCircumference/2)
+	assert.InDelta(t, float64(0), p2.Lat, 1e-15)
+	assert.Equal(t, math.Pi, p2.Lon)
+	p3 := p2.Walk(0, geo.EarthCircumference/2)
+	assert.InDelta(t, float64(0), p3.Lat, 1e-15)
+	assert.Equal(t, 2*math.Pi, p3.Lon)
 }

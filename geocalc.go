@@ -10,17 +10,27 @@ import "math"
 
 // EarthRadius in meters
 const EarthRadius = 6371e3
+// EarthCircumference in meters
+const EarthCircumference = 2*EarthRadius*math.Pi
 
 // Distance return the distance between two earth Point in meters
 func Distance(p1, p2 Point) float64 {
-	phi1 := p1.Lat * math.Pi / 180 // phi, alpha in radians
-	phi2 := p2.Lat * math.Pi / 180
-	deltaPhi := (p2.Lat - p1.Lat) * math.Pi / 180
-	deltaAlpha := (p2.Lon - p1.Lon) * math.Pi / 180
+	deltaPhi := p2.Lat - p1.Lat
+	deltaAlpha := p2.Lon - p1.Lon
 
 	a := math.Sin(deltaPhi/2)*math.Sin(deltaPhi/2) +
-		math.Cos(phi1)*math.Cos(phi2)*
+		math.Cos(p1.Lat)*math.Cos(p2.Lat)*
 			math.Sin(deltaAlpha/2)*math.Sin(deltaAlpha/2)
 	c := 2 * math.Atan2(math.Sqrt(a), math.Sqrt(1-a))
 	return EarthRadius * c // in metres
+}
+
+// DegreeToRad convert given arc in degree to rad
+func DegreeToRad(deg float64) float64 {
+	return deg*(math.Pi/180)
+}
+
+// RadToDegree convert given arc in rad to degree
+func RadToDegree(rad float64) float64 {
+	return rad*(180/math.Pi)
 }
