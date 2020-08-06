@@ -10,6 +10,7 @@ import "math"
 
 // EarthRadius in meters
 const EarthRadius = 6371e3
+// EarthCircumference in meters
 const EarthCircumference = 2*EarthRadius*math.Pi
 
 // Distance return the distance between two earth Point in meters
