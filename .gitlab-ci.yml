@@ -1,11 +1,14 @@
 stages:
  - testing
 
+before_script:
+  - go get -u golang.org/x/lint/golint
+  - go get -insecure all
+
 Testing:
   stage: testing
   image: golangci/golangci-lint
   script:
-    - go get -insecure all
     - golint -set_exit_status ./...
     - golangci-lint run
     - go test -cover ./... -coverprofile=cover.out
