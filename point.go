@@ -33,3 +33,8 @@ func (p Point) Walk(bearing, dist float64) Point {
 		math.Sin(p.Lat)*math.Sin(lat))
 	return Point{Lat: lat, Lon: lon}
 }
+
+// Degree return degree value of latitude, longitude
+func (p Point) Degree() (float64, float64) {
+	return RadToDegree(p.Lat), RadToDegree(p.Lon)
+}
