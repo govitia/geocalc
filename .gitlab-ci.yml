@@ -6,6 +6,7 @@ Testing:
   image: golangci/golangci-lint
   script:
     - go get -insecure all
+    - golint -set_exit_status ./...
     - golangci-lint run
     - go test -cover ./... -coverprofile=cover.out
     - go tool cover -func "cover.out"
