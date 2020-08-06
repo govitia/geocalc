@@ -32,3 +32,14 @@ func TestPoint_Walk(t *testing.T) {
 	assert.InDelta(t, float64(0), p3.Lat, 1e-15)
 	assert.Equal(t, 2*math.Pi, p3.Lon)
 }
+
+func TestPoint_Degree(t *testing.T) {
+	p1 := geo.NewPoint(0, 0)
+	lat, lon := p1.Degree()
+	assert.Equal(t, float64(0), lat)
+	assert.Equal(t, float64(0), lon)
+	p1.Lat, p1.Lon = math.Pi, math.Pi/2
+	lat, lon = p1.Degree()
+	assert.Equal(t, float64(180), lat)
+	assert.Equal(t, float64(90), lon)
+}
