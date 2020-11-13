@@ -1,8 +1,8 @@
 # Geocalc
-![](https://gitlab.com/psns/geocalc/badges/develop/pipeline.svg)
-![](https://gitlab.com/psns/geocalc/badges/develop/coverage.svg)
+![](https://gitlab.com/nicolasdscp/geocalc/badges/master/pipeline.svg)
+![](https://gitlab.com/nicolasdscp/geocalc/badges/develop/coverage.svg)
 ![](https://img.shields.io/badge/License-GPLv3-blue.svg)
-![](https://goreportcard.com/badge/github.com/govitia/geocalc)
+[![Go Report Card](https://goreportcard.com/badge/github.com/govitia/geocalc)](https://goreportcard.com/report/github.com/govitia/geocalc)
 
 Go minimalist library to compute earth points. Implementation of https://www.movable-type.co.uk/scripts/latlong.html.
 Angle are in Rad and distance in meters.
