@@ -29,7 +29,7 @@ func Distance(p1, p2 Point) float64 {
 
 // Intermediate calculate an intermediate point at any fraction along the great circle path between
 // p1 and p2. Start path at p1, if fraction=0, returned Point is p1. If fraction=1,
-// returned Point is p2. Number upper 1 can be used.
+// returned Point is p2.
 func Intermediate(p1, p2 Point, fraction float64) Point {
 	return p1.Walk(p1.Bearing(p2), Distance(p1, p2)*fraction)
 }
