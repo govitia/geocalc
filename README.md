@@ -8,7 +8,7 @@
 Go minimalist library to compute earth points. Implementation of https://www.movable-type.co.uk/scripts/latlong.html.
 Angle are in Rad and distance in meters.
 
-## Features in v1.3.2
+## Features in v1.3.3
 
 * Earth points in Rad/Degree
 * Get distance between two Points
