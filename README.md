@@ -1,6 +1,6 @@
 # Geocalc
 ![](https://gitlab.com/nicolasdscp/geocalc/badges/master/pipeline.svg)
-![](https://gitlab.com/nicolasdscp/geocalc/badges/develop/coverage.svg)
+![](https://gitlab.com/nicolasdscp/geocalc/badges/master/coverage.svg)
 ![](https://img.shields.io/badge/License-GPLv3-blue.svg)
 [![Go Report Card](https://goreportcard.com/badge/github.com/govitia/geocalc)](https://goreportcard.com/report/github.com/govitia/geocalc)
 
