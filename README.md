@@ -2,93 +2,64 @@
 ![](https://gitlab.com/psns/geocalc/badges/develop/pipeline.svg)
 ![](https://gitlab.com/psns/geocalc/badges/develop/coverage.svg)
 ![](https://img.shields.io/badge/License-GPLv3-blue.svg)
+![](https://goreportcard.com/badge/github.com/govitia/geocalc)
 
-Minimalist coordinate computation library
+Go minimalist library to compute earth points. Implementation of https://www.movable-type.co.uk/scripts/latlong.html.
+Angle are in Rad and distance in meters.
 
-## API Reference
+## Features in v1.3.2
 
-All these formulas are for calculations on the basis of a spherical earth
-(ignoring ellipsoidal effects) – which is accurate enough for most purposes…
-In fact, the earth is very slightly ellipsoidal; using a spherical model gives errors typically up to 0.3%.
-More informations [here](https://www.movable-type.co.uk/scripts/latlong.html).
+* Earth points in Rad/Degree
+* Get distance between two Points
+* Create Walk line
+* Get bearing between two Points
+* Rad/Degree conversion functions
 
-### Index
+## Getting start 
 
-[Constants](#constants)
-<br>[func Distance](#func-distancehttpsgitlabcompsnsgeocalc-blobdevelopgeocalcgol19)
-<br>[func Intermediate](#func-intermediatehttpsgitlabcompsnsgeocalc-blobdevelopgeocalcgol33)
-<br>[func DegreeToRad](#func-degreetoradhttpsgitlabcompsnsgeocalc-blobdevelopgeocalcgol38)
-<br>[func RadToDegree](#func-radtodegreehttpsgitlabcompsnsgeocalc-blobdevelopgeocalcgol43)
-<br>[type Point](#type-pointhttpsgitlabcompsnsgeocalc-blobdeveloppointgol6)
-* [func NewPoint](#func-newpointhttpsgitlabcompsnsgeocalc-blobdeveloppointgol13)
-* [func Bearing](#func-bearinghttpsgitlabcompsnsgeocalc-blobdeveloppointgol21)
-* [func Walk](#func-walkhttpsgitlabcompsnsgeocalc-blobdeveloppointgol29)
-* [func Degree](#func-degreehttpsgitlabcompsnsgeocalc-blobdeveloppointgol37)
-
-### Constants
+#### Creating Points
 ```go
-const (
-	EarthRadius        = 6371e3                    // EarthRadius in meters
-	EarthCircumference = 2 * EarthRadius * math.Pi // EarthCircumference in meters
-)
+// Point creation is in Rad
+p1 := geocalc.NewPoint(math.Pi, 0)
+p2 := geocalc.NewPoint(0, 0)
+```
+```go
+// Get degree values for p1
+latDegree, lonDegree := p1.Degree()
 ```
 
-### func [Distance](https://gitlab.com/psns/geocalc/-/blob/develop/geocalc.go#L19)
+#### Bearing and distance
 ```go
-func Distance(p1, p2 Point) float64
+// Get bearing in Rad between two Points
+bearing := p1.Bearing(p2)
+bearing := p2.Bearing(p1)
+// Distance in meters
+distance := geocalc.Distance(p1, p2)
 ```
-`Distance` return the distance between two earth `Point` in meters
 
-### func [Intermediate](https://gitlab.com/psns/geocalc/-/blob/develop/geocalc.go#L33)
+#### Unit conversion
 ```go
-func Intermediate(p1, p2 Point, fraction float64) Point
+rad := math.Pi
+degree := geocalc.RadToDegree(rad) // 180
+rad = geocalc.DegreeToRad(degree)  // math.Pi
 ```
+
+#### Walking on the earth surface
+Walk from a starting point to a final point with a bearing of 0 Rad and a distance of 1000m
+```go
+startPoint := geocalc.NewPoint(0, 0)
+finalPoint := startPoint.Walk(0, 1000) // Return a new point 
+```
+
+#### Intermediate Points
+
 `Intermediate` calculate an intermediate point at any fraction along the great circle path between
-`p1` and `p2`. Start path at `p1`, if `fraction`=0, returned `Point` is `p1`. If `fraction`=1,
-returned `Point` is `p2`. Number upper 1 can be used.
+p1 and p2. Start path at p1, if fraction=0, returned Point is p1. If fraction=1,
+returned Point is p2.
 
-### func [DegreeToRad](https://gitlab.com/psns/geocalc/-/blob/develop/geocalc.go#L38)
 ```go
-func DegreeToRad(deg float64) float64
+p1 := geocalc.NewPoint(math.Pi, 0)
+p2 := geocalc.NewPoint(0, 0)
+fraction := 0.5 // We want a Point in the middle of the other two Points
+p3 := geocalc.Intermediate(p1, p2, fraction)
 ```
-DegreeToRad convert given arc in degree to rad
-
-### func [RadToDegree](https://gitlab.com/psns/geocalc/-/blob/develop/geocalc.go#L43)
-```go
-func RadToDegree(rad float64) float64
-```
-RadToDegree convert given arc in rad to degree
-
-### type [Point](https://gitlab.com/psns/geocalc/-/blob/develop/point.go#L6)
-```go
-type Point struct {
-	Lat float64 // Latitude of the point in rad
-	Lon float64 // Longitude of the point in rad
-}
-```
-`Point` define an Earth point.
-
-#### func [NewPoint](https://gitlab.com/psns/geocalc/-/blob/develop/point.go#L13)
-```go
-func NewPoint(lat, lon float64) Point 
-```
-`NewPoint` create and return an new `Point` from given coordinates, `lat` and `lon` in radians.
-
-#### func [Bearing](https://gitlab.com/psns/geocalc/-/blob/develop/point.go#L21)
-```go
-func (p Point) Bearing(pt Point) float64
-```
-`Bearing` return the bearing in rad between current and given `Point`
-
-#### func [Walk](https://gitlab.com/psns/geocalc/-/blob/develop/point.go#L29)
-```go
-func (p Point) Walk(bearing, dist float64) Point
-```
-`Walk` return destination `Point` in function of given `dist` and `bearing` from start p `Point`.
-bearing in rad (clockwise from north) and dist in meters.
-
-#### func [Degree](https://gitlab.com/psns/geocalc/-/blob/develop/point.go#L37)
-```go
-func (p Point) Degree() (float64, float64)
-```
-`Degree` return degree value of `Lat`, `Lon`
