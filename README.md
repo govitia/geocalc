@@ -2,6 +2,8 @@
 ![](https://gitlab.com/psns/geocalc/badges/develop/pipeline.svg)
 ![](https://gitlab.com/psns/geocalc/badges/develop/coverage.svg)
 ![](https://img.shields.io/badge/License-GPLv3-blue.svg)
+[![Go Report Card](https://goreportcard.com/badge/github.com/govitia/geocalc)](https://goreportcard.com/report/github.com/govitia/geocalc)
+
 
 Minimalist coordinate computation library
 

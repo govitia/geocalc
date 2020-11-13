@@ -10,7 +10,7 @@ import "math"
 
 const (
 	// EarthRadius in meters
-	EarthRadius        = 6371e3
+	EarthRadius = 6371e3
 	// EarthCircumference in meters
 	EarthCircumference = 2 * EarthRadius * math.Pi
 )

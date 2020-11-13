@@ -27,9 +27,9 @@ func (p Point) Bearing(pt Point) float64 {
 // Walk return destination Point given dist and bearing from start p Point.
 // bearing in rad (clockwise from north) and dist in meters
 func (p Point) Walk(bearing, dist float64) Point {
-	lat := math.Asin( math.Sin(p.Lat)*math.Cos(dist/EarthRadius) +
+	lat := math.Asin(math.Sin(p.Lat)*math.Cos(dist/EarthRadius) +
 		math.Cos(p.Lat)*math.Sin(dist/EarthRadius)*math.Cos(bearing))
-	lon := p.Lon + math.Atan2(math.Sin(bearing)*math.Sin(dist/EarthRadius)*math.Cos(p.Lat), math.Cos(dist/EarthRadius) -
+	lon := p.Lon + math.Atan2(math.Sin(bearing)*math.Sin(dist/EarthRadius)*math.Cos(p.Lat), math.Cos(dist/EarthRadius)-
 		math.Sin(p.Lat)*math.Sin(lat))
 	return Point{Lat: lat, Lon: lon}
 }
