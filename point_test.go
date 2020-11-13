@@ -6,7 +6,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	geo "gitlab.com/psns/geocalc"
+	geo "github.com/govitia/geocalc"
 )
 
 func TestNewPoint(t *testing.T) {
