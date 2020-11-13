@@ -14,6 +14,7 @@ All these formulas are for calculations on the basis of a spherical earth
 In fact, the earth is very slightly ellipsoidal; using a spherical model gives errors typically up to 0.3%.
 More informations [here](https://www.movable-type.co.uk/scripts/latlong.html).
 
+
 ### Index
 
 [Constants](#constants)
