@@ -16,7 +16,7 @@ Angle are in Rad and distance in meters.
 * Get bearing between two Points
 * Rad/Degree conversion functions
 
-## Getting start 
+## Quick start
 
 #### Creating Points
 ```go
